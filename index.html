@@ -264,6 +264,30 @@ a.card .d{font-size:13px;color:var(--dim);line-height:1.65;margin-top:4px;}
     </div>
   </header>
 
+  <!-- 首頁即時退休現金流試算器 -->
+  <section class="sec" id="home-calculator">
+    <span class="sec-tag">FREE TOOL · 免費試算</span>
+    <h2>退休後每個月<br><span class="g">你還差多少錢？</span></h2>
+    <p>不用跳到其他頁面，直接在下面輸入金額，立即算出每月現金流缺口。填入的是「退休後」預估收支。</p>
+    <div id="retirement-calc" style="background:#f3f6fb;border:1px solid #ccd8e8;border-radius:16px;padding:20px;margin:20px 0;color:#243f68">
+<p style="font-weight:700;margin:0 0 12px">直接填入預估的退休後每月金額（新台幣／元）</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px">
+<label style="display:block;font-weight:600">退休金收入<input data-calc="income" data-label="退休金" type="number" min="0" step="100" value="20000" inputmode="numeric" style="display:block;width:100%;box-sizing:border-box;padding:12px;margin-top:7px;border:1px solid #a9bbd2;border-radius:9px;font-size:18px;background:white;color:#1c304e"></label>
+<label style="display:block;font-weight:600">租金／其他收入<input data-calc="income" data-label="租金／其他收入" type="number" min="0" step="100" value="10000" inputmode="numeric" style="display:block;width:100%;box-sizing:border-box;padding:12px;margin-top:7px;border:1px solid #a9bbd2;border-radius:9px;font-size:18px;background:white;color:#1c304e"></label>
+<label style="display:block;font-weight:600">生活支出<input data-calc="expense" data-label="生活支出" type="number" min="0" step="100" value="40000" inputmode="numeric" style="display:block;width:100%;box-sizing:border-box;padding:12px;margin-top:7px;border:1px solid #a9bbd2;border-radius:9px;font-size:18px;background:white;color:#1c304e"></label>
+<label style="display:block;font-weight:600">房貸及其他貸款<input data-calc="expense" data-label="房貸及其他貸款" type="number" min="0" step="100" value="20000" inputmode="numeric" style="display:block;width:100%;box-sizing:border-box;padding:12px;margin-top:7px;border:1px solid #a9bbd2;border-radius:9px;font-size:18px;background:white;color:#1c304e"></label>
+<label style="display:block;font-weight:600">其他固定支出<input data-calc="expense" data-label="其他固定支出" type="number" min="0" step="100" value="0" inputmode="numeric" style="display:block;width:100%;box-sizing:border-box;padding:12px;margin-top:7px;border:1px solid #a9bbd2;border-radius:9px;font-size:18px;background:white;color:#1c304e"></label>
+</div>
+<div aria-live="polite" style="margin-top:20px;background:#fff;border-radius:12px;padding:16px;border:1px solid #d6e0ed">
+<div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><span>每月總收入：<strong id="calc-income">30,000 元</strong></span><span>每月總支出：<strong id="calc-expense">60,000 元</strong></span></div>
+<hr style="border:0;border-top:1px solid #d6e0ed;margin:14px 0"><div id="calc-result-label" style="font-weight:700">退休後每月現金流缺口</div><div id="calc-result" style="font-size:clamp(27px,6vw,40px);font-weight:800;color:#b23d45">30,000 元</div><p id="calc-message" style="margin:4px 0 0;font-size:14px">依照目前填寫的數字，退休後每月仍需補足 30,000 元。</p>
+</div>
+<button id="calc-copy" type="button" style="margin-top:14px;background:#243f68;color:white;border:0;border-radius:9px;padding:12px 18px;cursor:pointer;font-weight:700">複製我的試算結果</button><span id="calc-copy-status" aria-live="polite" style="margin-left:10px;font-size:13px"></span>
+</div>
+    <p style="font-size:12px;line-height:1.7;color:var(--dim);margin-top:12px">試算僅供初步盤點，不含通膨、醫療、稅費及投資風險，不代表個別財務建議。</p>
+    <p style="margin-top:14px"><a href="https://lin.ee/UzWQ1bb" target="_blank" rel="noopener" style="display:inline-block;background:#243f68;color:#fff;padding:12px 20px;border-radius:9px;text-decoration:none;font-weight:700">預約一對一資產諮詢 ↗</a></p>
+  </section>
+
   <!-- ═════ ② 所有頁面：每多一頁，在「卡片開始」下面加一張，最新的放最上面 ═════ -->
   <section class="sec">
     <input class="find" id="find" type="search" placeholder="找找看：輸入關鍵字">
@@ -394,5 +418,36 @@ setTimeout(function(){ document.querySelectorAll('.fade').forEach(function(el){ 
 · 每多一頁，在「卡片開始」下面加一張卡片，最新的放最上面；舊的卡片不要刪
 ═══════════════════════════════════════════
 -->
+<script>
+(function(){
+  var root=document.getElementById('retirement-calc');
+  if(!root)return;
+  var inputs=Array.prototype.slice.call(root.querySelectorAll('input[data-calc]'));
+  var format=function(n){return n.toLocaleString('zh-TW')+' 元';};
+  function amount(el){var n=Number(el.value);return Number.isFinite(n)?Math.max(0,n):0;}
+  function calculate(){
+    var income=0,expense=0;
+    inputs.forEach(function(el){if(el.dataset.calc==='income')income+=amount(el);else expense+=amount(el);});
+    var diff=income-expense;
+    document.getElementById('calc-income').textContent=format(income);
+    document.getElementById('calc-expense').textContent=format(expense);
+    document.getElementById('calc-result-label').textContent=diff<0?'退休後每月現金流缺口':diff>0?'退休後每月現金流餘額':'退休後每月收支打平';
+    document.getElementById('calc-result').textContent=format(Math.abs(diff));
+    document.getElementById('calc-result').style.color=diff<0?'#b23d45':'#245c48';
+    document.getElementById('calc-message').textContent=diff<0?'依照目前填寫的數字，退休後每月仍需補足 '+format(-diff)+'。':diff>0?'依照目前填寫的數字，退休後每月預計剩餘 '+format(diff)+'。':'目前收支打平，仍應預留緊急支出。';
+    return {income:income,expense:expense,diff:diff};
+  }
+  inputs.forEach(function(el){el.addEventListener('input',calculate);});
+  document.getElementById('calc-copy').addEventListener('click',function(){
+    var r=calculate();
+    var lines=['【退休現金流試算結果】'].concat(inputs.map(function(el){return el.dataset.label+'：'+format(amount(el));}));
+    lines.push('每月總收入：'+format(r.income),'每月總支出：'+format(r.expense),(r.diff<0?'每月缺口：':'每月餘額：')+format(Math.abs(r.diff)));
+    var status=document.getElementById('calc-copy-status');
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(lines.join('\n')).then(function(){status.textContent='已複製';},function(){status.textContent='複製失敗，請手動選取';});}
+    else{status.textContent='瀏覽器不支援自動複製';}
+  });
+  calculate();
+})();
+</script>
 </body>
 </html>
