@@ -1,15 +1,56 @@
 <!doctype html>
 <html lang="zh-Hant-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>市場震盪下的防禦型基金評估報告</title><meta name="description" content="比較三類防禦取向基金，從最大回撤、配息來源與匯率避險檢視退休現金流。"><style>
 :root{color-scheme:dark;--bg:#101b2d;--panel:#192940;--ink:#f7f8fb;--soft:#c4cede;--gold:#f1c87d;--line:#3a4c64}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:1rem/1.75 system-ui,"Microsoft JhengHei",sans-serif}main,header,footer{width:min(100% - 2rem,64rem);margin:auto}header{padding:1rem 0}a{color:var(--gold);text-underline-offset:.23em}h1,h2,h3{line-height:1.35}h1{font-size:clamp(2rem,6vw,4rem);max-width:13em;margin:.35em 0}h2{font-size:clamp(1.4rem,3vw,2rem)}p{max-width:70ch}.hero{padding:clamp(1.2rem,5vw,3rem);border:1px solid var(--line);border-radius:1.4rem;background:linear-gradient(130deg,#213957,#152338)}.eyebrow{color:var(--gold);letter-spacing:.1em;font-weight:700}nav{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;margin:1rem 0}section{margin:2.4rem 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr));gap:1rem}.card{background:var(--panel);border:1px solid var(--line);border-radius:1rem;padding:1rem 1.25rem}.card h3{margin:.3rem 0;color:var(--gold)}.card p,.muted{color:var(--soft)}dl{display:grid;gap:.8rem}dt{font-weight:700;color:var(--gold)}dd{margin:0;color:var(--soft)}fieldset{border:1px solid var(--line);border-radius:1rem;padding:1rem}label{display:flex;gap:.65rem;align-items:start;padding:.35rem 0}input{accent-color:var(--gold);width:1.15rem;height:1.15rem;flex:none;margin-top:.3rem}button{font:inherit;color:#162136;background:var(--gold);border:0;border-radius:.6rem;padding:.5rem .9rem;cursor:pointer}footer{border-top:1px solid var(--line);padding:1rem 0 2rem}a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:4px}@media print{:root{color-scheme:light;--bg:#fff;--panel:#fff;--ink:#111;--soft:#222;--gold:#473016;--line:#aaa}.hero{background:none}nav,button{display:none}.card{break-inside:avoid}}
-</style></head><body>
+.choices{padding:0;border:0}.choices legend{margin-bottom:.55rem;color:var(--soft)}.choice{display:flex;padding:1rem;cursor:pointer}.choice:has(:checked){border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}.choice-title{display:block;color:var(--gold);margin-bottom:.45rem}.detail{display:block;margin-bottom:.5rem;color:var(--soft)}.entry label{display:block}.entry input{display:block;width:100%;height:auto;padding:.45rem;border:1px solid var(--line);border-radius:.4rem;background:var(--bg);color:var(--ink);font:inherit}.entry summary{cursor:pointer;color:var(--gold)}#comparison{margin-top:1rem}#comparison dd{overflow-wrap:anywhere}@media print{.entry{display:none}body.report-only main>*:not(#results){display:none}body.report-only header{display:none}} </style></head><body>
 <header><a href="./">資產優化阿瑋｜回資訊總覽</a></header>
 <main><div class="hero"><div class="eyebrow">基金評估報告 · 投資教育版</div><h1>市場震盪下的防禦型基金評估報告</h1><p>如果這筆錢接下來要繳房貸、補生活費，或準備退休，先確認你什麼時候會用到，再看基金在下跌時的表現，以及現金流從哪裡來。</p></div>
 <nav aria-label="報告目錄"><a href="#risk">先辨認風險</a><a href="#types">比較三類基金</a><a href="#review">基金評估表</a><a href="#income">現金流怎麼看</a><a href="#check">退休自查</a></nav>
-<section id="risk"><h2>01｜你想防的是哪一種風險？</h2><div class="grid"><article class="card"><h3>市場下跌</h3><p>看同一級別過去在市場壓力期間跌了多少、花多久回到前高。</p></article><article class="card"><h3>匯率波動</h3><p>如果生活費以新台幣支付，就用新台幣看成果，並確認級別是否避險、避的是哪組幣別。</p></article><article class="card"><h3>急著用錢</h3><p>先分開安排近期支出與長期投資。核對基金贖回到帳時間，並算好配息變少時的缺口。</p></article></div></section>
-<section id="types"><h2>02｜三類基金怎麼比較？</h2><div class="grid"><article class="card"><h3>貨幣市場基金</h3><p><strong>用途：</strong>評估短期資金停泊。</p><p><strong>要查：</strong>計價幣別、持有工具、信用風險和贖回時間。基金淨值仍可能變動。</p></article><article class="card"><h3>短天期債券基金</h3><p><strong>用途：</strong>評估是否能減少對長天期利率波動的曝險。</p><p><strong>要查：</strong>存續期間、信用評等、非投資等級債占比與幣別。利率和信用利差都可能影響淨值。</p></article><article class="card"><h3>防禦取向多重資產基金</h3><p><strong>用途：</strong>評估股、債等資產混合後的風險。</p><p><strong>要查：</strong>股票上限、債券品質、實際持倉與衍生品用途。分散效果會隨市場變化。</p></article></div><p class="muted">本報告以「防禦取向」描述配置目的。匯率避險則是基金級別的獨立欄位，可能涉及成本與剩餘匯率風險。</p></section>
-<section id="review"><h2>03｜拿同一套欄位看基金</h2><div class="card"><dl><div><dt>基金名稱、級別與 RR 等級</dt><dd>先核對幣別、累積或配息、是否避險，再查基金文件的風險等級與主要風險。</dd></div><div><dt>含息總報酬、最大回撤與回復時間</dt><dd>用相同區間、幣別與配息再投入假設比較。最大回撤看區間內從高點跌到後續低點的最大幅度。</dd></div><div><dt>配息來源與到帳</dt><dd>查配息頻率、歷史金額、是否可能涉及本金，以及實際換匯後入帳金額。</dd></div><div><dt>費用、持倉與贖回</dt><dd>核對經理費、通路費、申購或贖回費、主要持倉及贖回到帳時間。</dd></div></dl></div></section>
+<section id="risk"><h2>01｜你想防的是哪一種風險？</h2><fieldset class="choices"><legend>選一項</legend><div class="grid"><label class="card choice"><input type="radio" name="risk" value="0"><span><strong class="choice-title">市場下跌</strong><span class="detail">看同一級別過去在市場壓力期間跌了多少、花多久回到前高。</span></span></label><label class="card choice"><input type="radio" name="risk" value="1"><span><strong class="choice-title">匯率波動</strong><span class="detail">如果生活費以新台幣支付，就用新台幣看成果，並確認級別是否避險、避的是哪組幣別。</span></span></label><label class="card choice"><input type="radio" name="risk" value="2"><span><strong class="choice-title">急著用錢</strong><span class="detail">先分開安排近期支出與長期投資。核對基金贖回到帳時間，並算好配息變少時的缺口。</span></span></label></div></fieldset></section>
+<section id="types"><h2>02｜三類基金怎麼比較？</h2><fieldset class="choices"><legend>選一項</legend><div class="grid"><label class="card choice"><input type="radio" name="types" value="0"><span><strong class="choice-title">貨幣市場基金</strong><span class="detail"><strong>用途：</strong>評估短期資金停泊。</span><span class="detail"><strong>要查：</strong>計價幣別、持有工具、信用風險和贖回時間。基金淨值仍可能變動。</span></span></label><label class="card choice"><input type="radio" name="types" value="1"><span><strong class="choice-title">短天期債券基金</strong><span class="detail"><strong>用途：</strong>評估是否能減少對長天期利率波動的曝險。</span><span class="detail"><strong>要查：</strong>存續期間、信用評等、非投資等級債占比與幣別。利率和信用利差都可能影響淨值。</span></span></label><label class="card choice"><input type="radio" name="types" value="2"><span><strong class="choice-title">防禦取向多重資產基金</strong><span class="detail"><strong>用途：</strong>評估股、債等資產混合後的風險。</span><span class="detail"><strong>要查：</strong>股票上限、債券品質、實際持倉與衍生品用途。分散效果會隨市場變化。</span></span></label></div></fieldset><p class="muted">本報告以「防禦取向」描述配置目的。匯率避險則是基金級別的獨立欄位，可能涉及成本與剩餘匯率風險。</p></section>
+<section id="results" hidden aria-labelledby="result-title"><h2 id="result-title">你的基金比較報告</h2><p id="selection" aria-live="polite"></p><div class="card"><p id="focus"></p><p id="match"></p><p class="muted">這組條件目前尚無已核對的基金名單。手上已有基金資料，可展開下方欄位並列比較。</p><details class="entry"><summary>加入最多 3 檔基金比較</summary><div id="fields" class="grid"></div></details></div><div id="comparison" class="grid"></div><p><button type="button" id="print-report">列印這份報告／存成 PDF</button></p></section><section id="review"><h2>03｜拿同一套欄位看基金</h2><div class="card"><dl><div><dt>基金名稱、級別與 RR 等級</dt><dd>先核對幣別、累積或配息、是否避險，再查基金文件的風險等級與主要風險。</dd></div><div><dt>含息總報酬、最大回撤與回復時間</dt><dd>用相同區間、幣別與配息再投入假設比較。最大回撤看區間內從高點跌到後續低點的最大幅度。</dd></div><div><dt>配息來源與到帳</dt><dd>查配息頻率、歷史金額、是否可能涉及本金，以及實際換匯後入帳金額。</dd></div><div><dt>費用、持倉與贖回</dt><dd>核對經理費、通路費、申購或贖回費、主要持倉及贖回到帳時間。</dd></div></dl></div></section>
 <section id="income"><h2>04｜現金有入帳，資產還剩多少？</h2><p>假設投入 100 萬，一年領到 5 萬，期末持有的部位市值是 92 萬。把部位和領到的錢加起來是 97 萬，簡化計算約少 3 萬。這個例子先不計費用、稅、匯率或配息再投入。</p><p>看現金流時，記下實際入帳。看投資成果時，連期末部位價值一起看，才能判斷這段期間的資產變化。</p></section>
 <section id="check"><h2>05｜退休現金流自查</h2><fieldset><legend>買之前，這四題答得出來嗎？</legend><label><input type="checkbox">我知道未來一年哪幾個月會需要這筆錢。</label><label><input type="checkbox">我知道這個基金級別過去最多跌多少。</label><label><input type="checkbox">我算過配息變少時，房貸和生活費的缺口。</label><label><input type="checkbox">我知道贖回多久到帳、換匯和費用怎麼算。</label></fieldset><p class="muted">勾選只供當下自查，網頁不會送出答案。</p><button type="button" id="print">列印／存成 PDF</button></section>
 <section><h2>去哪裡查基金文件？</h2><p>到 <a href="https://www.sitca.org.tw/">投信投顧公會</a> 或 <a href="https://www.fundclear.com.tw/">基金資訊觀測站</a> 找基金資料，再用基金公司的公開說明書、月報與配息公告核對所選級別。</p></section>
 </main><footer>資產優化阿瑋 · 投資教育資料，未評比個別基金。</footer>
-<script>document.getElementById('print').addEventListener('click',()=>window.print());</script></body></html>
+<script>document.getElementById('print').addEventListener('click',()=>window.print());
+const groups={"risk":["市場下跌","匯率波動","急著用錢"],"types":["貨幣市場基金","短天期債券基金","防禦取向多重資產基金"]};
+const priorities=['查同級別在相同期間的最大回撤與回復時間，並核對持倉集中度。','先查級別是否對新台幣避險，以及避險範圍與成本。外幣避險級別仍可能有新台幣匯率曝險。','先核對贖回到帳時間、淨值波動和預計用錢日期。'];
+const typeChecks=['核對計價幣別、信用風險和贖回時間。','核對存續期間、信用評等和非投資等級債占比。','核對股票比重、主要持倉和衍生品用途。'];
+const columns=['基金全名與級別','風險等級','最大回撤（含區間）','配息來源','匯率避險','費用','官方文件及資料日期'];
+const fields=document.getElementById('fields');
+const cards=document.getElementById('comparison');
+const inputs=Array.from({length:3},(_,index)=>{
+  const group=document.createElement('fieldset');
+  const legend=document.createElement('legend');legend.textContent='基金 '+(index+1);group.append(legend);fields.append(group);
+  return columns.map(title=>{
+    const label=document.createElement('label');label.textContent=title;
+    const input=document.createElement('input');input.type='text';input.maxLength=300;label.append(input);group.append(label);
+    return input;
+  });
+});
+function compare(){
+ cards.replaceChildren();
+ for(const row of inputs){
+   const values=row.map(input=>input.value.trim());
+   if(!values.some(Boolean))continue;
+   const card=document.createElement('article');card.className='card';
+   const title=document.createElement('h3');title.textContent=values[0]||'尚未填入基金名稱';card.append(title);
+   const list=document.createElement('dl');
+   columns.slice(1).forEach((key,i)=>{const item=document.createElement('div');const dt=document.createElement('dt');dt.textContent=key;const dd=document.createElement('dd');dd.textContent=values[i+1]||'待填';item.append(dt,dd);list.append(item);});
+   card.append(list);cards.append(card);
+ }
+}
+function show(){
+ const risk=document.querySelector('input[name="risk"]:checked');
+ const type=document.querySelector('input[name="types"]:checked');
+ if(!risk||!type)return;
+ document.getElementById('results').hidden=false;
+ document.getElementById('selection').textContent=groups.risk[risk.value]+' ／ '+groups.types[type.value];
+ document.getElementById('focus').textContent=priorities[risk.value];
+ document.getElementById('match').textContent=typeChecks[type.value];
+}
+document.querySelectorAll('.choices input').forEach(input=>input.addEventListener('change',show));
+fields.addEventListener('input',compare);
+document.getElementById('print-report').addEventListener('click',()=>{document.body.classList.add('report-only');window.print();});
+window.addEventListener('afterprint',()=>document.body.classList.remove('report-only'));
+show();compare();</script></body></html>
