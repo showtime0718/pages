@@ -25,9 +25,10 @@ strong,b{font-weight:750}
 section{margin:42px 0}
 nav{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
 nav a{background:#fffaf0;color:var(--ink);padding:10px 15px;border-radius:8px;text-decoration:none;font-weight:700}
-.bank-grid,.steps,.numbers{display:grid;gap:14px}
+.bank-grid,.numbers{display:grid;gap:14px}
 .bank-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-.steps,.numbers{grid-template-columns:repeat(3,minmax(0,1fr))}
+.numbers{grid-template-columns:repeat(3,minmax(0,1fr))}
+.numbers.two{grid-template-columns:repeat(2,minmax(0,1fr))}
 .card,.case,.note{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
 .card ul{padding-left:21px;margin:0}
 .card li+li{margin-top:10px}
@@ -41,7 +42,7 @@ nav a{background:#fffaf0;color:var(--ink);padding:10px 15px;border-radius:8px;te
 .numbers span{font-size:14px;color:var(--muted)}
 .btn{display:inline-block;background:#f2d49f;color:var(--ink);border-radius:9px;padding:13px 20px;text-decoration:none;font-weight:800}
 footer{border-top:1px solid var(--line);padding:20px 0 38px;font-size:14px;color:var(--muted)}
-@media(max-width:640px){.bank-grid,.steps{grid-template-columns:1fr}.numbers{gap:6px}.numbers div{padding:9px}.numbers b{font-size:20px}.numbers span{font-size:12px}.card,.case{padding:18px}}
+@media(max-width:640px){.bank-grid{grid-template-columns:1fr}.numbers{gap:6px}.numbers div{padding:9px}.numbers b{font-size:20px}.numbers span{font-size:12px}.card,.case{padding:18px}}
 </style>
 </head>
 <body>
@@ -78,36 +79,32 @@ footer{border-top:1px solid var(--line);padding:20px 0 38px;font-size:14px;color
 </section>
 <section id="about">
 <h2>我是江嘉瑋，資產優化阿瑋</h2>
-<p>我協助有房、有房貸、準備退休的人，把房貸、其他負債和每月開銷放在一起看。先找出每月還剩多少，再算調整後能多留多少錢。</p>
-<div class="steps">
-<article class="card"><h3>先盤點</h3><p>整理房貸餘額、利率、還款年限、收入和固定支出。</p></article>
-<article class="card"><h3>再比較</h3><p>用同一份收支，比較調整前後的月付、費用和每月現金流。</p></article>
-<article class="card"><h3>安排下一步</h3><p>把寬限期到期後的月付和生活預備金算進去，再決定要不要調整。</p></article>
-</div>
+<p>我幫有房貸的人一起算，房貸、車貸和信貸繳完後，每個月還能留多少錢過生活。</p>
 </section>
+
 <section aria-label="改善前後金額比較">
 <h2>調整之後，每個月差多少？</h2>
 <article class="case">
-<div class="case-label">匿名諮詢案例｜調整方案情境估算</div>
-<h3>房貸和其他負債一起盤點</h3>
+<div class="case-label">案例一｜三筆貸款每月共繳 8 萬</div>
+<h3>每月生活費從 1 萬變成 7.3 萬</h3>
+<p>這位大哥每月有 9 萬元現金流。光是信貸就要繳 2.9 萬、車貸要繳 1.4 萬，加上房貸，每月共繳 8 萬。繳完貸款，只剩 1 萬元能過生活。</p>
 <div class="numbers">
-<div><span>調整前每月現金流</span><b>−4 萬元</b></div>
-<div><span>規劃後每月估算</span><b>＋1 萬元</b></div>
-<div><span>每月差額</span><b>＋5 萬元</b></div>
+<div><b>1 萬</b><span>調整前每月可用</span></div>
+<div><b>7.3 萬</b><span>調整後每月可用</span></div>
+<div><b>＋6.3 萬</b><span>每月多留下</span></div>
 </div>
-<p class="muted">依個案的原房貸、其他負債與可用資金比較調整方案。規劃後金額依個案條件估算。</p>
 </article>
 <article class="case">
-<div class="case-label">房貸月付試算</div>
-<h3>800 萬房貸，寬限期內的月付差多少？</h3>
-<div class="numbers">
-<div><span>30 年本息攤還</span><b>31,610 元</b></div>
-<div><span>前 3 年只繳息</span><b>16,667 元</b></div>
-<div><span>寬限期內月付差額</span><b>14,943 元</b></div>
+<div class="case-label">案例二｜月薪 6 萬，信貸和車貸每月約 3 萬</div>
+<h3>原本每月幾乎沒餘裕，調整後每月多約 6.4 萬現金流</h3>
+<p>原本信貸每月約 2 萬、車貸約 1 萬，光這兩筆就用掉約一半薪水。再扣掉其他開銷，月底幾乎沒剩。後來運用手上的房子做調整，每月多了約 6.4 萬元現金流。</p>
+<div class="numbers two">
+<div><b>幾乎沒剩</b><span>調整前每月餘裕</span></div>
+<div><b>＋約 6.4 萬</b><span>調整後每月新增現金流</span></div>
 </div>
-<p class="muted">以年利率 2.5%、總年限 30 年估算。若前 3 年只繳息，第 4 年起剩 27 年攤還，月付約 33,980 元。</p>
 </article>
 </section>
+
 <section class="contact" aria-labelledby="contact-title">
 <h2 id="contact-title">想用自己的數字算一次？</h2>
 <p>把房貸餘額、目前月付和每月收支整理好，透過官方 LINE 預約一對一諮詢。</p>
