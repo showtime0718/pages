@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="用資金目標篩選台股 ETF，並排比較基金類型，複製 4 段研究提示詞。">
+<title>ETF 到底怎麼選？｜資產規劃阿瑋</title>
+<style>
+:root{--navy:#0d2436;--navy-dark:#081b2b;--gold:#f2cf7d;--paper:#f6f3eb;--white:#fffdf7;--ink:#122c3f;--muted:#4c5f6d;--stroke:#d5d9d5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.65}
+a{color:inherit} button,input{font:inherit} button{cursor:pointer} :focus-visible{outline:3px solid #b87908;outline-offset:3px}
+.wrap{max-width:1060px;margin:auto;padding-inline:24px}
+.hero{background:var(--navy-dark);color:var(--white);padding:22px 0 62px;border-bottom:5px solid var(--gold)}
+.back{color:var(--gold);font-size:.9rem;text-underline-offset:4px}
+h1,h2,h3,p{margin:0} h1{font-size:clamp(2.5rem,7vw,4.8rem);line-height:1.18;margin-top:39px;letter-spacing:-.055em} h1 span{color:var(--gold)}
+.hero p{max-width:40rem;color:#d3dfe6;margin-top:16px;font-size:1.05rem}
+main{padding-block:34px 60px}section+section{margin-top:42px}
+h2{font-size:clamp(1.4rem,4vw,2rem);line-height:1.3;margin-bottom:12px}
+.sub{color:var(--muted);font-size:.95rem}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:17px 0}
+.filters button,.copy,.clear{border:1px solid var(--stroke);background:var(--white);color:var(--ink);border-radius:9px;padding:9px 13px;font-weight:700}
+.filters button[aria-pressed="true"],.copy{background:var(--navy);color:white;border-color:var(--navy)}
+.search{display:block;max-width:29rem;width:100%;margin:8px 0 14px;padding:10px 13px;border:1px solid #81909b;border-radius:9px;background:var(--white);color:var(--ink)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:10px;margin-top:12px}
+.card,.panel,details{background:var(--white);border:1px solid var(--stroke);border-radius:14px;padding:18px}
+.card{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.code{font-size:1.65rem;font-weight:900;letter-spacing:.04em;line-height:1.1}
+.kind{font-size:.82rem;color:var(--muted)} .card a{font-size:.86rem;text-underline-offset:4px}
+.pick{margin-top:6px;font-size:.92rem;font-weight:700;cursor:pointer} input[type="checkbox"]{accent-color:var(--navy)}
+.table-wrap{overflow:auto;margin-top:12px}table{width:100%;min-width:440px;border-collapse:collapse;text-align:left;font-size:.91rem}td,th{padding:9px 12px;border-bottom:1px solid var(--stroke)}thead th{background:var(--navy);color:white}
+.clear{margin-top:12px}.prompts{display:grid;gap:8px;margin-top:13px}summary{cursor:pointer;font-weight:800}
+.prompt{margin:12px 0;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--muted)}
+.feedback{font-size:.88rem;margin-left:8px}
+@media(max-width:550px){.wrap{padding-inline:17px}.hero{padding-bottom:35px}.hero h1{margin-top:26px}.cards{grid-template-columns:1fr 1fr;gap:8px}.card{padding:12px}.panel{padding:13px}.filters button{font-size:.85rem}}
+@media(max-width:350px){.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+<a class="back" href="./">← 回阿瑋的工具首頁</a>
+<h1>ETF 到底<span>怎麼選？</span></h1>
+<p>先選這筆錢的用途，再把想看的 ETF 加到比較表。查績效、持股重疊或配息時，可以直接複製下方提示詞。</p>
+</div></header>
+<main class="wrap">
+<section aria-labelledby="filter-heading">
+<h2 id="filter-heading">這筆錢想拿來做什麼？</h2>
+<p class="sub">從 5 檔台股 ETF 範例開始。類型篩選僅供研究參考。</p>
+<div class="filters" role="group" aria-label="ETF 類型篩選">
+<button type="button" data-kind="all" aria-pressed="true">全部</button>
+<button type="button" data-kind="market" aria-pressed="false">想累積資產</button>
+<button type="button" data-kind="income" aria-pressed="false">想研究配息</button>
+</div>
+<label for="query">搜尋代碼或名稱</label>
+<input class="search" id="query" type="search" placeholder="例如 00878 或國泰" autocomplete="off">
+<p id="count" class="sub" role="status"></p>
+<div id="cards" class="cards"></div>
+</section>
+<section class="panel" aria-labelledby="compare-heading">
+<h2 id="compare-heading">我的 ETF 比較表</h2>
+<p id="selection" class="sub" aria-live="polite"></p>
+<div class="table-wrap" id="table"></div>
+<p class="sub" id="shared-index"></p>
+<button id="clear" type="button" class="clear" hidden>清除比較</button>
+</section>
+<section aria-labelledby="prompts-heading">
+<h2 id="prompts-heading">4 段 ETF 提示詞</h2>
+<p class="sub">加入比較的 ETF 會自動帶入適用的提示詞。複製後，把【】內的欄位換成自己的資料。</p>
+<div class="prompts" id="prompts"></div>
+</section>
+</main>
+<script>
+const funds = [
+  {code:"0050", name:"元大台灣50", kind:"market", index:"富時臺灣證券交易所臺灣50指數"},
+  {code:"006208", name:"富邦台50", kind:"market", index:"富時臺灣證券交易所臺灣50指數"},
+  {code:"0056", name:"元大高股息", kind:"income", index:"富時臺灣證券交易所臺灣高股息指數"},
+  {code:"00878", name:"國泰永續高股息", kind:"income", index:"MSCI臺灣ESG永續高股息精選30指數"},
+  {code:"00919", name:"群益台灣精選高息", kind:"income", index:"臺灣指數公司特選臺灣上市上櫃精選高息指數"}
+];
+const prompts = [["先釐清這筆錢的用途", "我有【可投資金額】，預計【多久後】會用到這筆錢，主要目標是【累積資產／定期領現金】。帳面下跌超過【金額或百分比】，我就可能抱不住。請用白話幫我列出挑 ETF 時最該看的三個條件，說明每個條件怎麼對應我的目標。如果我的用錢時間、領錢需求和承受跌幅有衝突，請指出來，並先問我最重要的缺失資訊。"], ["用同一段期間比報酬和跌幅", "請比較【0050、00878、00919】。挑一段三檔皆已掛牌且有完整資料的共同期間，使用同一幣別、同一起訖日與同一資料口徑。表格列出累計含息總報酬和最大回撤，註明配息再投入假設、資料來源與日期，並交代用市價還是淨值計算。使用已包含配息的還原序列時，請避免再加一次配息。缺資料就標「待查」。"], ["找出持股重疊與集中風險", "我考慮各投入【金額】到【ETF 代碼】。請查投信公布的最新持股，列出資料日期、各檔前十大持股和權重，找出重複持有的公司，再依實際投入金額試算合計持股占比。若能取得完整持股，也列出合併後權重最高的產業。只能取得前十大時，請把結果標註為「前十大持股估算」，附上來源連結。"], ["排出配息入帳表，找出現金缺口", "我打算用【本金】買【ETF 代碼】，試算買入價格是【每單位價格】，每月房貸要繳【金額】，繳款日是【日期】。請以同樣的持有單位數，拿最近 12 個月公告的實際每單位配息與發放日做情境回推。列出每月預估入帳、當月差額，以及把領到的配息留到下個月之後，還有哪些月份要自己補錢。再用同樣日期試算每次少配 30% 的情況。請註明是否估入稅費，並附上官方配息資料來源。把歷史回推與少配情境各列一欄。"]];
+const titles = {market:"市值型",income:"高股息型"};
+const selected = new Set();
+let active = "all";
+const query = document.querySelector("#query");
+const cards = document.querySelector("#cards");
+const count = document.querySelector("#count");
+const clear = document.querySelector("#clear");
+const buttons = [...document.querySelectorAll("[data-kind]")];
+
+function filterFunds(kind, keyword) {
+  return funds.filter(fund => (
+    (kind === "all" || fund.kind === kind) &&
+    (fund.code.includes(keyword) || fund.name.replaceAll("台","臺").includes(keyword))
+  ));
+}
+
+function renderCards() {
+  const matches = filterFunds(active, query.value.trim().replaceAll("台","臺"));
+  count.textContent = matches.length ? `找到 ${matches.length} 檔` : "沒有符合的 ETF。試試其他代碼，或切回「全部」。";
+  cards.innerHTML = matches.map(fund => `
+    <article class="card">
+      <b class="code">${fund.code}</b>
+      <h3>${fund.name}</h3>
+      <span class="kind">${titles[fund.kind]}</span>
+      <a href="https://www.twse.com.tw/zh/ETFortune/etfInfo/${fund.code}" target="_blank" rel="noopener">證交所資料 ↗</a>
+      <label class="pick"><input type="checkbox" value="${fund.code}" ${selected.has(fund.code) ? "checked" : ""}> 加入比較</label>
+    </article>`).join("");
+}
+
+function promptText(body, index) {
+  const codes = [...selected].join("、");
+  if (!codes || index === 0 || (index === 1 && selected.size < 2)) return body;
+  const template = index === 1 ? "【0050、00878、00919】" : "【ETF 代碼】";
+  if (index === 3 && selected.size > 1) return body + ` 可研究的 ETF 有 ${codes}，請先問我想用哪一檔做試算。`;
+  return body.replace(template, codes);
+}
+
+function renderSelection() {
+  const choices = funds.filter(fund => selected.has(fund.code));
+  document.querySelector("#selection").textContent = choices.length ? `已加入 ${choices.length} 檔。` : "勾選上方的 ETF 就能比較類型與追蹤指數。";
+  document.querySelector("#table").innerHTML = choices.length ? `
+    <table><thead><tr><th scope="col">ETF</th><th scope="col">類型</th><th scope="col">追蹤指數</th></tr></thead>
+    <tbody>${choices.map(fund => `<tr><th scope="row">${fund.code} ${fund.name}</th><td>${titles[fund.kind]}</td><td>${fund.index}</td></tr>`).join("")}</tbody></table>` : "";
+  const sharedIndex = choices.some((fund, position) =>
+    choices.slice(position + 1).some(other => other.index === fund.index)
+  );
+  document.querySelector("#shared-index").textContent = sharedIndex
+    ? "你勾選的 ETF 裡有追蹤同一指數的組合。可用持股重疊提示詞再查各自的實際持股。"
+    : "";
+  clear.hidden = !choices.length;
+  document.querySelectorAll(".prompt").forEach((node, index) => {
+    node.textContent = promptText(prompts[index][1], index);
+  });
+}
+
+document.querySelector("#prompts").innerHTML = prompts.map(([title], index) => `
+  <details><summary>${index + 1}｜${title}</summary>
+    <p class="prompt"></p><button type="button" class="copy">複製提示詞</button><span class="feedback" role="status"></span>
+  </details>`).join("");
+
+buttons.forEach(button => button.addEventListener("click", () => {
+  active = button.dataset.kind;
+  buttons.forEach(item => item.setAttribute("aria-pressed", String(item === button)));
+  renderCards();
+}));
+query.addEventListener("input", renderCards);
+cards.addEventListener("change", event => {
+  const field = event.target;
+  if (field.type !== "checkbox") return;
+  if (field.checked) selected.add(field.value);
+  else selected.delete(field.value);
+  renderSelection();
+});
+clear.addEventListener("click", () => {
+  selected.clear();
+  renderCards();
+  renderSelection();
+  query.focus();
+});
+document.querySelectorAll(".copy").forEach(button => button.addEventListener("click", async () => {
+  const panel = button.closest("details");
+  const prompt = panel.querySelector(".prompt");
+  const message = panel.querySelector(".feedback");
+  try {
+    await navigator.clipboard.writeText(prompt.textContent);
+    message.textContent = "已複製";
+  } catch {
+    const selection = window.getSelection();
+    if (selection) {
+      const range = document.createRange();
+      range.selectNodeContents(prompt);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+    message.textContent = "請長按或使用裝置的複製功能。";
+  }
+}));
+renderCards();
+renderSelection();
+</script>
+</body>
+</html>
